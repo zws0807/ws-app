@@ -1,0 +1,35 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "flow-local-background",
+  "main": "jobs/src/index.ts",
+  "compatibility_date": "2026-11-03",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "flow-local",
+      "database_id": "TODO_D1_DATABASE_ID",
+      "migrations_dir": "db/migrations",
+    },
+  ],
+  "r2_buckets": [
+    { "binding": "PRIVATE_FILES", "bucket_name": "flow-local-private" },
+    { "binding": "EXPORT_FILES", "bucket_name": "flow-local-exports" },
+  ],
+  "queues": {
+    "producers": [{ "binding": "JOBS_QUEUE", "queue": "flow-local-jobs" }],
+    "consumers": [
+      {
+        "queue": "flow-local-jobs",
+        "max_batch_size": 1,
+        "max_batch_timeout": 1,
+        "max_retries": 5,
+        "dead_letter_queue": "flow-local-dead-letter",
+      },
+    ],
+  },
+  "triggers": { "crons": ["*/10 * * * *"] },
+  "vars": { "APP_ENV": "local", "APP_ORIGIN": "http://127.0.0.1:5173" },
+  "observability": { "enabled": true },
+}

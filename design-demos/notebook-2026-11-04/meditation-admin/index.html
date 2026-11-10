@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FLOWDO · 运营后台</title>
+  <link rel="stylesheet" href="./admin.css">
+  <script defer src="./console.js"></script>
+  <script defer src="./admin.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="identity" href="#overview"><span class="logo" aria-hidden="true">✦</span><span><b>FLOWDO</b><small>运营工作台</small></span></a>
+      <nav id="navigation" aria-label="后台导航"></nav>
+      <p class="sidebar-foot"><span class="dot"></span> 本机预览 · V4</p>
+    </aside>
+    <div class="surface">
+      <header class="topbar">
+        <span id="breadcrumb">运营后台 / 工作台</span>
+        <div class="actions">
+          <a id="book-link" href="./dir-1.html#meditation" target="_blank" rel="noopener">打开手账 ↗</a>
+          <button id="logout" class="secondary" hidden>退出登录</button>
+        </div>
+      </header>
+      <main>
+        <div class="page-heading"><div><h1 id="page-title"></h1><p id="page-description"></p></div><span id="page-badge" class="badge"></span></div>
+        <div id="preview-page"></div>
+        <div id="audio-page" hidden>
+          <p id="notice" role="status" aria-live="polite"></p>
+          <button id="retry-audio-list" class="secondary" type="button" hidden>重试加载列表</button>
+          <section id="offline-panel" hidden>
+            <h2>连接本机后台</h2>
+            <p>在访达双击「启动冥想后台.command」，然后打开 <a href="http://127.0.0.1:8765/admin#meditation">冥想音频管理</a> 登录。这里可以预览上传表单。</p>
+            <fieldset disabled><label>音频名称<input placeholder="例如 睡前放松"></label><label>所属分类<select><option>助眠</option></select></label><label>音频文件<input type="file"></label></fieldset>
+          </section>
+          <section id="login-panel" class="login-card" hidden>
+            <p class="eyebrow">管理员入口</p>
+            <h2>登录后管理音频</h2>
+            <p class="panel-copy">在启动后台的终端窗口里找到管理密码。</p>
+            <form id="login-form">
+              <label>管理密码<input type="password" name="code" required autocomplete="current-password"></label>
+              <button type="submit">登录</button>
+            </form>
+          </section>
+          <div id="workspace" hidden>
+            <section class="audio-panel">
+              <div class="audio-heading">
+                <div><h2>音频列表</h2><p class="panel-copy">先保存草稿并试听，确认后再发布到手账。</p></div>
+                <button id="open-upload" type="button">＋ 上传音频</button>
+              </div>
+              <div class="audio-states" role="group" aria-label="按发布状态筛选">
+                <button type="button" data-audio-state="" aria-pressed="true">全部 <span></span></button>
+                <button type="button" data-audio-state="draft" aria-pressed="false">草稿 <span></span></button>
+                <button type="button" data-audio-state="published" aria-pressed="false">已发布 <span></span></button>
+                <button type="button" data-audio-state="archived" aria-pressed="false">已下架 <span></span></button>
+              </div>
+              <div class="audio-filters">
+                <input type="search" id="audio-search" aria-label="搜索音频名称" placeholder="搜索音频名称">
+                <select id="audio-category" aria-label="按分类筛选">
+                  <option value="">全部分类</option>
+                  <option>助眠</option><option>能量</option><option>关系</option><option>减压</option><option>专注</option>
+                </select>
+                <button id="clear-audio-filters" class="secondary" type="button" hidden>清空筛选</button>
+              </div>
+              <ul id="tracks"></ul>
+              <p id="audio-empty" class="audio-empty" role="status" hidden></p>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <dialog id="upload-dialog" aria-labelledby="upload-title">
+    <div class="dialog-head">
+      <h2 id="upload-title">上传音频</h2>
+      <button id="close-upload" class="secondary" type="button">取消</button>
+    </div>
+    <form id="upload-form">
+      <label>音频名称<input name="title" placeholder="例如 睡前放松" required maxlength="80" autofocus></label>
+      <label>所属分类
+        <select name="category" required>
+          <option value="" selected disabled>请选择分类</option>
+          <option>助眠</option><option>能量</option><option>关系</option><option>减压</option><option>专注</option>
+        </select>
+      </label>
+      <label>音频文件<input type="file" name="audio" accept=".mp3,.m4a,.wav" required></label>
+      <p class="muted">支持 MP3、M4A 和 WAV，单条最多 25 MB。</p>
+      <p id="upload-error" role="alert" hidden></p>
+      <button type="submit">保存为草稿</button>
+    </form>
+  </dialog>
+  <dialog id="detail-dialog" aria-labelledby="detail-title">
+    <div class="dialog-head"><h2 id="detail-title"></h2><form method="dialog"><button class="secondary">关闭</button></form></div>
+    <div id="detail-body"></div>
+  </dialog>
+</body>
+</html>

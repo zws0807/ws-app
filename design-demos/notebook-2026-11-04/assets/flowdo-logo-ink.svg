@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 140" fill="none" role="img" aria-label="FLOWDO">
+<g stroke="#493b55" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+<path d="M17 108V30H72M17 68H61"/>
+<path d="M96 30V108H144"/>
+<path d="M196 27C169 27 155 44 155 69C155 95 169 111 196 111C223 111 237 95 237 69C237 44 223 27 196 27Z"/>
+<path d="M260 30L276 103Q278 113 283 103L308 48L333 103Q338 113 340 103L356 30"/>
+<path d="M384 108V30H410C441 30 458 45 458 69C458 94 441 108 410 108H384"/>
+<path d="M549 28C523 22 499 36 492 59C485 84 500 106 523 111C550 117 574 101 579 77C581 68 580 59 576 51"/>
+</g>
+<circle cx="570" cy="31" r="7" fill="#493b55"/>
+</svg>
